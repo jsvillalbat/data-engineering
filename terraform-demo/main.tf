@@ -8,20 +8,21 @@ terraform {
 }
 
 provider "google" {
-  project = "encoded-region-475220-t5"
-  region  = "us-central1"
+  project     = var.project
+  region      = var.region
+  credentials = file(var.credentials)
 }
 
 resource "google_storage_bucket" "demo-bucket" {
-  name          = "encoded-region-475220-t5-terra-bucket"
-  location      = "US"
+  name     = var.gcs_bucket_name
+  location = var.location
 
   # Optional, but recommended settings:
-  storage_class = "STANDARD"
+  storage_class               = var.gcs_storage_class
   uniform_bucket_level_access = true
 
   versioning {
-    enabled     = true
+    enabled = true
   }
 
   lifecycle_rule {
@@ -29,9 +30,14 @@ resource "google_storage_bucket" "demo-bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
     condition {
-      age = 1  // days
+      age = 1 // days
     }
   }
 
   force_destroy = true
+}
+
+resource "google_bigquery_dataset" "demo_dataset" {
+  dataset_id = var.bq_dataset_name
+  location   = var.location
 }

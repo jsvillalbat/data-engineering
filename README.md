@@ -1,4 +1,4 @@
-## Project: data-engineering
+## NY Taxi data engineering project
 
 A minimal NY Taxi data ingestion project using Dockerized Postgres, a Jupyter notebook for loading data, and a small Python script.
 

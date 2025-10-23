@@ -21,6 +21,7 @@ Data volume is mounted at `./ny_taxi_postgres_data`.
 
 ## Load data using the notebook
 Open `ingestion_pipeline.ipynb` and run the cells in order. It will:
+- Download the NY taxi data from https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page 
 - Read `yellow_tripdata_2025-01.parquet` into a pandas DataFrame
 - Create a SQLAlchemy engine to Postgres:
   - `postgresql://root:root@localhost:5432/ny_taxi`
